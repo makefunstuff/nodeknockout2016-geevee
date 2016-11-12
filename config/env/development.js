@@ -7,8 +7,8 @@
 module.exports = {
   db: 'mongodb://mongo/givedev',
   facebook: {
-    clientID: process.env.FACEBOOK_CLIENTID,
-    clientSecret: process.env.FACEBOOK_SECRET,
+    clientID: '1260365850686845',
+    clientSecret: 'a3da69bab9feb996da625daf12a803bd',
     callbackURL: 'http://localhost:3000/auth/facebook/callback'
   },
   twitter: {

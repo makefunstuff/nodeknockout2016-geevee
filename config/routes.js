@@ -23,12 +23,21 @@ module.exports = function (app, passport) {
   app.get('/login', users.login);
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
+
   app.post('/users', users.create);
   app.post('/users/session',
     pauth('local', {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
+
+  app.get('/auth/facebook',
+    pauth('facebook', {
+      scope: [ 'email', 'user_likes', 'user_posts'],
+      failureRedirect: '/login'
+  }), users.signin);
+  app.get('/auth/facebook/callback', pauth('facebook', fail), users.authCallback);
+
   app.get('/users/:userId', users.show);
   app.param('userId', users.load);
 

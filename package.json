@@ -21,12 +21,14 @@
     "dotenv": "~2.0.0",
     "express": "~4.14.0",
     "express-session": "~1.14.0",
+    "fb": "^1.1.1",
     "forever": "~0.15.1",
     "jade": "~1.11.0",
     "method-override": "~2.3.5",
     "mongoose": "~4.6.1",
     "morgan": "~1.7.0",
     "multer": "~1.2.0",
+    "nodemon": "1.11.0",
     "notifier": "~0.1.7",
     "only": "0.0.2",
     "passport": "~0.3.2",
@@ -37,7 +39,6 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.3",
     "view-helpers": "~0.1.5",
-    "nodemon": "1.11.0",
     "winston": "~2.3.0"
   },
   "devDependencies": {

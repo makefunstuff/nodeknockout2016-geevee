@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 const local = require('./passport/local');
+const facebook = require('./passport/facebook');
 /**
  * Expose
  */
@@ -20,4 +21,5 @@ module.exports = function (passport) {
 
   // use these strategies
   passport.use(local);
+  passport.use(facebook);
 };
