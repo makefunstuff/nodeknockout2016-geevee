@@ -11,7 +11,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
       ul.nav.navbar-nav.navbar-right
         - if (req.isAuthenticated())
           li
-            a(href="/users/"+req.user.id, title="Profile") Profile
+            a(href="/giveaways/new", title="New Giveaway") Add Giveway
           li
             a(href="/logout", title="logout") Logout
         - else

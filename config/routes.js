@@ -44,7 +44,7 @@ module.exports = function (app, passport) {
   // user flow
   app.get('/giveaways/new', giveaways.new);
   app.post('/giveaways', giveaways.create);
-  app.get('/giveaways', users.load, giveaways.index);
+  app.get('/giveaways', giveaways.index);
   app.get('/giveaways/:id', giveaways.show);
 
   /**

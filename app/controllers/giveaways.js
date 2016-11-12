@@ -11,9 +11,7 @@ exports.show = function (req, res) {
 
 exports.index = function (req, res) {
   const giveaways = getFakeGiveaways();
-  const user = req.profile;
-
-  console.log(user);
+  const { user } = req;
 
   respond(res, 'giveaways/index', {
     title: 'Giveways',

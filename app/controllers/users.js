@@ -16,13 +16,6 @@ const User = mongoose.model('User');
 exports.load = async(function* (req, res, next, _id) {
   let criteria = { _id };
 
-  console.log('loading....');
-  if (!criteria) {
-    criteria = req.session.passport.user;
-  }
-
-  console.log(criteria);
-
   try {
     req.profile = yield User.load({ criteria });
     if (!req.profile) return next(new Error('User not found'));
