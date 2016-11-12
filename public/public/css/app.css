@@ -43,10 +43,6 @@ body {
   App styles
   ------------------------------------------------ */
 
-body {
-  padding-top: 60px;
-}
-
 .article, .comment {
   padding: 15px 0;
   border-bottom: 1px solid #e8e8e8;
@@ -114,4 +110,25 @@ button.error:focus {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.bg-1 {
+  background-color: #1abc9c; /* Green */
+  color: #ffffff;
+}
+.bg-2 {
+  background-color: #474e5d; /* Dark Blue */
+  color: #ffffff;
+}
+.bg-3 {
+  background-color: #ffffff; /* White */
+  color: #555555;
+}
+.bg-4 {
+  background-color: #2f2f2f; /* Black Gray */
+  color: #fff;
+}
+
+.container-fluid {
+  padding: 0;
 }

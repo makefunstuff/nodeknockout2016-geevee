@@ -1,15 +1,14 @@
 extends ../layouts/default
 
 block main
-    .jumbotron
-        .container
-            h1.display-3 Hello, world!
-            p
-                | Welcome to our giveay
-            p
-                a.btn.btn-primary.btn-lg(href='#', role='button') Learn more »
-    .container
-        // Example row of columns
-        .row
+    // First Container
+    .container-fluid.bg-1.text-center
+        h3.margin Get Your GiveAway?
+        img.img-responsive.img-circle.margin(src='public/img/bird.jpg', style='display:inline', alt='Bird', width='350', height='350')
+        h3 Right Now!
 
-                    a.btn.btn-secondary(href='#', role='button') Login
+    // Second Container
+    .container-fluid.bg-2.text-center
+        h3.margin What We Are?
+        p
+        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
