@@ -5,6 +5,7 @@
  */
 
 const users = require('../app/controllers/users');
+const pages = require('../app/controllers/pages');
 const auth = require('./middlewares/authorization');
 
 const fail = {
@@ -32,9 +33,7 @@ module.exports = function (app, passport) {
   app.param('userId', users.load);
 
 
-  app.get('/', (req, res) => {
-    res.send('1337');
-  });
+  app.get('/', pages.landing);
   /**
    * Error handling
    */
