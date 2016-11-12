@@ -6,6 +6,8 @@ const GiveawaySchema = new Schema({
     body: String,
     deadline: { type: Date, default: Date.now },
     finished: { type: Boolean, default: false },
+    ownerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     points: Number
 });
 

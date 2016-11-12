@@ -1,4 +1,7 @@
 const { respond, getFakeGiveaways } = require('../utils');
+const mongoose = require('mongoose');
+const { wrap: async } = require('co');
+const Giveaway = mongoose.model('Giveaway');
 
 exports.show = function (req, res) {
   const user = req.profile;
@@ -26,9 +29,19 @@ exports.new = function (req, res) {
   });
 };
 
-exports.create = function (req, res) {
+exports.create = async(function* (req, res) {
+  try {
+    const giveaway = new Giveaway(req.body);
+    giveaway.ownerId = req.user.id;
+    yield giveaway.save();
+  } catch(e) {
+    return respond(res, 'giveaways/new', {
+      errors: [e.message]
+    });
+  }
 
-};
+  return res.redirect('/');
+});
 
 exports.edit = function (req, res) {
 
