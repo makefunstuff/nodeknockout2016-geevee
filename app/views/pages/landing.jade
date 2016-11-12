@@ -1,14 +1,59 @@
 extends ../layouts/default
 
-block main
-    // First Container
-    .container-fluid.bg-1.text-center
-        h3.margin Get Your GiveAway?
-        img.img-responsive.img-circle.margin(src='public/img/bird.jpg', style='display:inline', alt='Bird', width='350', height='350')
-        h3 Right Now!
+block append head
+  link(rel="stylesheet", href="/css/landing-page.css")
 
-    // Second Container
-    .container-fluid.bg-2.text-center
-        h3.margin What We Are?
-        p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+block content
+  .intro-header
+    .container
+      .row
+        .col-lg-12
+          .intro-message
+            h1 Geevee
+            h3 Simple giveway service
+            .btn.btn-lg.btn-primary Create giveway
+
+  a(name='services')
+  .content-section-a
+    .container
+      .row
+        .col-lg-5.col-sm-6
+          .clearfix
+          h2.section-heading
+            | How it works?
+            br
+            | Simple!
+          p.lead
+            |  All you need is your facebook login
+        .col-lg-5.col-lg-offset-2.col-sm-6
+          img.img-responsive(src='http://lorempixel.com/400/200/', alt='')
+  .content-section-b
+    .container
+      .row
+        .col-lg-5.col-lg-offset-1.col-sm-push-6.col-sm-6
+          hr.section-heading-spacer
+          .clearfix
+          h2.section-heading
+            | Create giveway right now
+          p.lead
+            a.btn.btn-lg.btn-success Create Now
+        .col-lg-5.col-sm-pull-6.col-sm-6
+          img.img-responsive(src='http://lorempixel.com/500/200/', alt='')
+
+  footer
+    .container
+      .row
+        .col-lg-12
+          ul.list-inline
+            li
+              a(href='#') Home
+            li.footer-menu-divider ⋅
+            li
+              a(href='#about') About
+            li.footer-menu-divider ⋅
+            li
+              a(href='#contact') Contact
+  // jQuery
+  script(src='js/jquery.js')
+  // Bootstrap Core JavaScript
+  script(src='js/bootstrap.min.js')
