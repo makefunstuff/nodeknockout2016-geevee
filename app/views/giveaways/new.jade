@@ -10,17 +10,20 @@ block content
         .col-md-8.col-md-offset-2
           form
             .form-group
-              label(for="giveway_title") Title
-              input(type="text" class="form-control" id="giveway_title" placeholder="Input your item name")
+              label(for="giveaway_title") Title
+              input(type="text" class="form-control" id="giveaway_title" placeholder="Input your item name")
             .form-group
-              label(for="giveway_image") Image Url
-              input(type="text" name="giveaway[image]" class="form-control" id="giveway_image")
+              label(for="giveaway_image") Image Url
+              input(type="text" name="giveaway[image]" class="form-control" id="giveaway_image" placeholder="Paste image url")
             .form-group
-              label(for="giveway_description") Description
-              textarea(class="form-control" id="giveway_description")
+              label(for="giveaway_description") Description
+              textarea(class="form-control" id="giveaway_description")
             .form-group
-              label(for="giveway_points") Points
-              input(class="form-control" id="giveway_points")
+              label(for="giveaway_points") Points
+              input(class="form-control" id="giveaway_points")
+            .form-group
+              label(for="giveaway_deadline") Deadline
+              input(class="form-control" id="giveaway_deadline" data-date=true)
             .form-group
               button(type="submit" class="btn btn-success") Create Giveaway
               a.btn.btn-danger(href="/") Cancel
