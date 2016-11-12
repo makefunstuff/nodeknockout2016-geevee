@@ -29,3 +29,11 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
 
 };
+
+exports.edit = function (req, res) {
+
+};
+
+exports.update = function (req, res){
+
+};
