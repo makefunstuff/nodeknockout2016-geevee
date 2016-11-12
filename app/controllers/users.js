@@ -14,7 +14,15 @@ const User = mongoose.model('User');
  */
 
 exports.load = async(function* (req, res, next, _id) {
-  const criteria = { _id };
+  let criteria = { _id };
+
+  console.log('loading....');
+  if (!criteria) {
+    criteria = req.session.passport.user;
+  }
+
+  console.log(criteria);
+
   try {
     req.profile = yield User.load({ criteria });
     if (!req.profile) return next(new Error('User not found'));
@@ -24,30 +32,6 @@ exports.load = async(function* (req, res, next, _id) {
   next();
 });
 
-/**
- * Create user
- */
-
-exports.create = async(function* (req, res) {
-  const user = new User(req.body);
-  user.provider = 'local';
-  try {
-    yield user.save();
-    req.logIn(user, err => {
-      if (err) req.flash('info', 'Sorry! We are not able to log you in!');
-      return res.redirect('/');
-    });
-  } catch (err) {
-    const errors = Object.keys(err.errors)
-      .map(field => err.errors[field].message);
-
-    res.render('users/signup', {
-      title: 'Sign up',
-      errors,
-      user
-    });
-  }
-});
 
 /**
  *  Show profile
@@ -69,26 +53,7 @@ exports.signin = function () {};
 
 exports.authCallback = login;
 
-/**
- * Show login form
- */
 
-exports.login = function (req, res) {
-  res.render('users/login', {
-    title: 'Login'
-  });
-};
-
-/**
- * Show sign up form
- */
-
-exports.signup = function (req, res) {
-  res.render('users/signup', {
-    title: 'Sign up',
-    user: new User()
-  });
-};
 
 /**
  * Logout
@@ -96,7 +61,7 @@ exports.signup = function (req, res) {
 
 exports.logout = function (req, res) {
   req.logout();
-  res.redirect('/login');
+  res.redirect('/');
 };
 
 /**

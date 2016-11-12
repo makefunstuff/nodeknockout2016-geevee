@@ -5,11 +5,11 @@
  */
 
 const users = require('../app/controllers/users');
-const pages = require('../app/controllers/pages');
+const giveaways = require('../app/controllers/giveaways');
 const auth = require('./middlewares/authorization');
 
 const fail = {
-  failureRedirect: '/login'
+  failureRedirect: '/'
 };
 
 /**
@@ -20,11 +20,8 @@ module.exports = function (app, passport) {
   const pauth = passport.authenticate.bind(passport);
 
   // user routes
-  app.get('/login', users.login);
-  app.get('/signup', users.signup);
   app.get('/logout', users.logout);
 
-  app.post('/users', users.create);
   app.post('/users/session',
     pauth('local', {
       failureRedirect: '/login',
@@ -42,7 +39,14 @@ module.exports = function (app, passport) {
   app.param('userId', users.load);
 
 
-  app.get('/', pages.landing);
+  app.get('/', giveaways.index);
+
+  // user flow
+  app.get('/giveaways/new', giveaways.new);
+  app.post('/giveaways', giveaways.create);
+  app.get('/giveaways', users.load, giveaways.index);
+  app.get('/giveaways/:id', giveaways.show);
+
   /**
    * Error handling
    */

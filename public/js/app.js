@@ -1,8 +1,14 @@
-$(document).ready(function () {
+(function($) {
 
-  $('#tags').tagsInput({
-    'height':'60px',
-    'width':'280px'
+  $(document).ready(function() {
+    var container = $('#items_container');
+
+    container.imagesLoaded(function() {
+      container.masonry({
+        itemSelector: '.masonry-item',
+        isFitWidth: true
+      });
+    });
   });
 
-});
+})(window.jQuery);

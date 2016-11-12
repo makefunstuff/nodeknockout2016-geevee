@@ -1,0 +1,25 @@
+extends ../layouts/default
+block content
+  .row
+    .col-md-12
+      .row
+        .col-md-8.col-md-offset-2
+          h1.text-center New Giveaway
+      .row
+        .container
+        .col-md-8.col-md-offset-2
+          form
+            .form-group
+              label(for="giveway_title") Title
+              input(type="text" class="form-control" id="giveway_title" placeholder="Input your item name")
+            .form-group
+              label(for="giveway_image") Image Url
+              input(type="text" name="giveaway[image]" class="form-control" id="giveway_image")
+            .form-group
+              label(for="giveway_description") Description
+              textarea(class="form-control" id="giveway_description")
+            .form-group
+              label(for="giveway_points") Points
+              input(class="form-control" id="giveway_points")
+            .form-group
+              button(type="submit" class="btn btn-success") Create Giveaway

@@ -82,11 +82,6 @@ button.error:focus {
   margin-top: 10px;
 }
 
-.navbar-brand {
-  font-size: 14px;
-  color: #000 !important;
-}
-
 .navbar-right > li > a {
   padding-left: 5px;
   padding-right: 5px;
@@ -110,4 +105,13 @@ button.error:focus {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.icon-text {
+  padding-left: 5px;
+}
+
+.masonry-item {
+  width: 350px;
+  margin-left: 10px;
 }
