@@ -18,8 +18,9 @@ block content
           .masonry-item
             .panel.panel-default
               .panel-heading
-                h4= giveaway.title
-                  span.badge= giveaway.points
+                a(href="/giveaways/#{giveaway._id}" alt="Giveway page")
+                  h4= giveaway.title
+                    span.badge= giveaway.points
               .panel-body
                 img.img-responsive.img-rounded(src="#{giveaway.image}")
                 p= giveaway.body

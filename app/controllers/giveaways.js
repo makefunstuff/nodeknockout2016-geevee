@@ -43,6 +43,14 @@ exports.create = async(function* (req, res) {
   return res.redirect('/');
 });
 
+exports.show = async(function* (req, res) {
+  const giveaway = yield Giveaway.findById(req.params.id);
+
+  respond(res, 'giveaways/show', {
+    giveaway
+  });
+});
+
 exports.edit = function (req, res) {
 
 };
