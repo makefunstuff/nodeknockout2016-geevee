@@ -25,7 +25,7 @@ exports.index = async(function* (req, res) {
     const today = moment().startOf('day')
 
     user = yield User.findById(user.id);
-    pendingGiveaways = yield Giveaway.find({finished: false, deadline: { $lte: today.toDate() }});
+    pendingGiveaways = yield Giveaway.find({_id: user._id, finished: false, deadline: { $lte: today.toDate() }});
     wonGiveaways = yield Giveaway.find({finished: true, winnerId: user._id});
 
     if (pendingGiveaways.length) {
