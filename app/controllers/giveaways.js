@@ -4,6 +4,7 @@ const { wrap: async } = require('co');
 const winston = require('winston');
 const Giveaway = mongoose.model('Giveaway');
 const User = mongoose.model('User');
+const logger = require('winston');
 
 exports.show = function (req, res) {
   const user = req.profile;
@@ -40,6 +41,7 @@ exports.delete = async(function* (req, res) {
     const giveaway = yield Giveaway.findById(req.params.id);
     giveaway.remove();
   } catch (e) {
+    winston.error(e.message);
     return respondOrRedirect({ req, res }, 'giveaways/index', {}, {
       type: 'error',
       text: e.message
@@ -64,6 +66,7 @@ exports.create = async(function* (req, res) {
     yield giveaway.save();
 
   } catch(e) {
+    winston.error(e.message);
     return respond(res, 'giveaways/new', {
       errors: [e.message]
     });
@@ -101,6 +104,7 @@ exports.update = async(function* (req, res) {
   try {
     yield Giveaway.update({_id: req.params.id }, {$set: req.body.giveaway });
   } catch(e) {
+    winston.error(e.message);
     return respond(res, 'giveaways/new', {
       errors: [e.message]
     });
@@ -132,6 +136,7 @@ exports.participate = async(function* (req, res) {
       yield giveaway.save();
     }
   } catch (e) {
+    winston.error(e.message);
     return respond(res, 'giveaways/index');
   }
 
