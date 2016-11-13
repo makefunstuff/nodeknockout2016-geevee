@@ -19,7 +19,7 @@ module.exports = new FacebookStrategy({
     callbackURL: config.facebook.callbackURL
   },
   function (accessToken, refreshToken, profile, done) {
-    console.log(profile);
+    console.log(accessToken);
 
     const options = {
       criteria: { 'facebook.id': profile.id }

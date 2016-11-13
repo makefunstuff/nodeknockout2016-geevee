@@ -46,6 +46,7 @@ module.exports = function (app, passport) {
   app.post('/giveaways', giveaways.create);
   app.get('/giveaways', giveaways.index);
   app.get('/giveaways/:id', giveaways.show);
+  app.post('/giveaways/:id/delete', giveaways.delete);
   app.get('/giveaways/:id/edit', giveaways.edit);
   app.post('/giveaways/:id/participate', giveaways.participate);
   app.post('/giveaways/:id', giveaways.update);

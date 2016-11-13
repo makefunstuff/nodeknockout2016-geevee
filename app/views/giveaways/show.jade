@@ -22,8 +22,10 @@ block content
               else
                 a(disabled="true" data-toggle="tooltip" data-placement="bottom" title="You don't have enough points").participate-cta.pull-right.btn.btn-primary Participate
             if user && user.isOwner(giveaway)
-              a(href="#").btn.btn-danger.col-md-3.pull-right.participate-cta Delete
-              a(href="#").btn.btn-primary.col-md-3.pull-right.participate-cta Edit
+              form(action="/giveaways/#{giveaway._id}/delete" method="POST")
+                input(type="hidden", name="_csrf", value="#{csrf_token}")
+                button(type="submit" class="btn btn-danger col-md-3 pull-right participate-cta") Delete
+              a(href="/giveaways/#{giveaway._id}/edit" type="submit" class="btn btn-primary col-md-3 pull-right participate-cta") Edit
 
         hr.details-divider
         .row

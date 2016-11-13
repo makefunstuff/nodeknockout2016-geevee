@@ -34,6 +34,23 @@ exports.new = function (req, res) {
   });
 };
 
+exports.delete = async(function* (req, res) {
+  try {
+    const giveaway = yield Giveaway.findById(req.params.id);
+    giveaway.remove();
+  } catch (e) {
+    return respondOrRedirect({ req, res }, 'giveaways/index', {}, {
+      type: 'error',
+      text: e.message
+    });
+  }
+
+  respondOrRedirect({ req, res }, '/', {}, {
+    type: 'success',
+    text: 'You have deleted your giveway'
+  });
+});
+
 exports.create = async(function* (req, res) {
   try {
     const giveaway = new Giveaway(req.body.giveaway);
@@ -71,13 +88,32 @@ exports.show = async(function* (req, res) {
   });
 });
 
-exports.edit = function (req, res) {
+exports.edit = async(function* (req, res) {
+  const giveaway = yield Giveaway.findById(req.params.id);
 
-};
+  respond(res, 'giveaways/edit', {
+    giveaway
+  });
+});
 
-exports.update = function (req, res) {
+exports.update = async(function* (req, res) {
+  try {
+    const giveaway = yield Giveaway.findById(req.params.id);
 
-};
+    console.log(giveaway);
+
+    yield giveaway.save(req.body.giveaway);
+  } catch(e) {
+    return respond(res, 'giveaways/new', {
+      errors: [e.message]
+    });
+  }
+
+  respondOrRedirect({ req, res }, '/', {}, {
+    type: 'success',
+    text: 'You have saved your giveaway'
+  });
+});
 
 exports.participate = async(function* (req, res) {
   let flash = {

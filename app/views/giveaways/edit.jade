@@ -1,2 +1,30 @@
 extends ../layouts/default
-extends ../layouts/new
+block content
+  .row
+    .col-md-12
+      .row
+        .col-md-8.col-md-offset-2
+          h1.text-center New Giveaway
+      .row
+        .container
+        .col-md-8.col-md-offset-2
+          form(action="/giveaways/#{giveaway._id}/" method="post")
+            input(type="hidden", name="_csrf", value="#{csrf_token}")
+            .form-group
+              label(for="giveaway_title") Title
+              input(type="text" class="form-control" id="giveaway_title" name="giveaway[title]" placeholder="Input your item name" value=giveaway.title)
+            .form-group
+              label(for="giveaway_image") Image Url
+              input(type="text" name="giveaway[image]" class="form-control" id="giveaway_image" placeholder="Paste image url" value=giveaway.image)
+            .form-group
+              label(for="giveaway_description") Description
+              textarea(class="form-control" name="giveaway[body]" id="giveaway_description"  placeholder="Describe item that you want to giveaway" value=giveaway.body)
+            .form-group
+              label(for="giveaway_points") Points
+              input(class="form-control" id="giveaway_points" name="giveaway[points]" placeholder="Rate your giveaway" value=giveaway.points)
+            .form-group
+              label(for="giveaway_deadline") Deadline
+              input(class="form-control" id="giveaway_deadline" name="giveaway[deadline]" data-date=true value=giveaway.deadline)
+            .form-group
+              button(type="submit" class="btn btn-success") Save
+              a.btn.btn-danger(href="/") Cancel
