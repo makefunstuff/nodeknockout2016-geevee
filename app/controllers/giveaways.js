@@ -12,8 +12,8 @@ exports.show = function (req, res) {
   });
 };
 
-exports.index = function (req, res) {
-  const giveaways = getFakeGiveaways();
+exports.index = async(function* (req, res) {
+  const giveaways = yield Giveaway.find({});
   const { user } = req;
 
   respond(res, 'giveaways/index', {
@@ -21,7 +21,7 @@ exports.index = function (req, res) {
     giveaways,
     user
   });
-};
+});
 
 exports.new = function (req, res) {
   res.render('giveaways/new', {
