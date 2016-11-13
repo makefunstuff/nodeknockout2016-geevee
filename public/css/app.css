@@ -128,3 +128,7 @@ button.error:focus {
 .user-info {
   cursor: pointer;
 }
+
+span {
+  margin-left: 3px;
+}

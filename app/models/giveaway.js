@@ -16,6 +16,10 @@ const GiveawaySchema = new Schema({
 GiveawaySchema.methods = {
   humanizedDeadline() {
     return moment(this.deadline).endOf('day').fromNow();
+  },
+
+  participantsCount() {
+    return this.participants.length;
   }
 };
 
