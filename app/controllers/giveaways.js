@@ -43,6 +43,10 @@ exports.index = async(function* (req, res) {
       pendingGiveaways = false;
     }
 
+    if (!wonGiveaways.length) {
+      wonGiveaways = false;
+    }
+
   }
   respond(res, 'giveaways/index', {
     title: 'Giveways',
