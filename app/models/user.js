@@ -22,7 +22,7 @@ const UserSchema = new Schema({
   email: { type: String, default: '' },
   username: { type: String, default: '' },
   provider: { type: String, default: '' },
-  karma: { type: Number, default: 0 },
+  karma: { type: Number, default: 5  },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
