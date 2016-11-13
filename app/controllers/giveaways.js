@@ -39,7 +39,14 @@ exports.new = function (req, res) {
 exports.delete = async(function* (req, res) {
   try {
     const giveaway = yield Giveaway.findById(req.params.id);
-    giveaway.remove();
+
+    if (!giveaway.finished) {
+      const user = yield User.findById(req.user.id);
+      user.karma -= 1;
+      yield user.save();
+    }
+
+    yield giveaway.remove();
   } catch (e) {
     winston.error(e.message);
     return respondOrRedirect({ req, res }, 'giveaways/index', {}, {
