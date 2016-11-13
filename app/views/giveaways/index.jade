@@ -22,13 +22,13 @@ block content
                   img.img-responsive.img-rounded(src="#{giveaway.image}")
                   h4.text-center= giveaway.title
                 hr
-                .col-md-3.points(data-toggle="tooltip" data-placement="bottom" title="Points you need to have to participate")
-                  i.fa.fa-money
-                  span= giveaway.points
-                .col-md-3.participants(data-toggle="tooltip" data-placement="bottom" title="Number of participants")
-                  i.fa.fa-user
-                  span= giveaway.participantsCount()
                 if user
+                  .col-md-3.points(data-toggle="tooltip" data-placement="bottom" title="Points you need to have to participate")
+                    i.fa.fa-money
+                    span= giveaway.points
+                  .col-md-3.participants(data-toggle="tooltip" data-placement="bottom" title="Number of participants")
+                    i.fa.fa-user
+                    span= giveaway.participantsCount()
                   .col-md-6.dealine(data-toggle="tooltip" data-placement="bottom" title="Giveaway deadline")
                     i.fa.fa-calendar
                     span.muted Ends in #{giveaway.humanizedDeadline()}
