@@ -13,11 +13,14 @@ block content
                 i(class="fa fa-lg fa-facebook-square" aria-hidden="true")
                 span.icon-text Login
             if user && user.isNotOwner(giveaway)
-              form(action="/giveaways/#{giveaway._id}/participate" method="post")
-                input(type="hidden", name="_csrf", value="#{csrf_token}")
-                button(type="submit" class="participate-cta btn btn-success col-md-4 pull-right")
-                  i.fa.fa-gift
-                  span Participate
+              if user.hasEnoughPoints(giveaway)
+                form(action="/giveaways/#{giveaway._id}/participate" method="post")
+                  input(type="hidden", name="_csrf", value="#{csrf_token}")
+                  button(type="submit" class="participate-cta btn btn-success col-md-4 pull-right")
+                    i.fa.fa-gift
+                    span Participate
+              else
+                a(disabled="true" data-toggle="tooltip" data-placement="bottom" title="You don't have enough points").participate-cta.pull-right.btn.btn-primary Participate
             if user && user.isOwner(giveaway)
               a(href="#").btn.btn-danger.col-md-3.pull-right.participate-cta Delete
               a(href="#").btn.btn-primary.col-md-3.pull-right.participate-cta Edit

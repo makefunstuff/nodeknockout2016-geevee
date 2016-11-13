@@ -113,6 +113,10 @@ UserSchema.methods = {
     return String(giveaway.ownerId) === String(this._id);
   },
 
+  hasEnoughPoints(giveaway) {
+    return Number(this.karma) === Number(giveaway.points);
+  },
+
   /**
    * Authenticate - check if the passwords are the same
    *
