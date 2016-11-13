@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const GiveawaySchema = new Schema({
@@ -11,5 +12,11 @@ const GiveawaySchema = new Schema({
     participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     points: Number
 });
+
+GiveawaySchema.methods = {
+  humanizedDeadline() {
+    return moment(this.deadline).endOf('day').fromNow();
+  }
+}
 
 mongoose.model('Giveaway', GiveawaySchema);

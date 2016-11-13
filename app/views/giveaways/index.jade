@@ -18,6 +18,6 @@ block content
                 p= giveaway.body
               .panel-footer
                 if user
-                  a.btn.btn-primary Details
+                  span.muted Ends in #{giveaway.humanizedDeadline()}
                 else
                   | Log in to see the details
