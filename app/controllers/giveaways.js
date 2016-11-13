@@ -63,16 +63,27 @@ exports.update = function (req, res) {
 };
 
 exports.participate = async(function* (req, res) {
-  try {
-    const giveaway = yield Giveaway.findById(req.params.id);
-    giveaway.participants.push(req.user.id);
-    yield giveaway.save();
-  } catch (e) {
-    return respond(res, 'giveaways/index', {});
-  }
-
-  respondOrRedirect({ req, res }, `/giveaways/${req.params.id}`, {}, {
+  let flash = {
     type: 'success',
     text: 'Now you are participating'
-  });
+  };
+
+  try {
+    const giveaway = yield Giveaway.findById(req.params.id);
+    const isParticipating = giveaway.participants.indexOf(req.params.id);
+
+    if (isParticipating) {
+      flash = {
+        type: 'warning',
+        text: 'You are already participating in this giveaway'
+      }
+    } else {
+      giveaway.participants.push(req.user.id);
+      yield giveaway.save();
+    }
+  } catch (e) {
+    return respond(res, 'giveaways/index');
+  }
+
+  respondOrRedirect({ req, res }, `/giveaways/${req.params.id}`, {}, flash);
 });
