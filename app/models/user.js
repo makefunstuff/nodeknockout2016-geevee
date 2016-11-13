@@ -114,7 +114,7 @@ UserSchema.methods = {
   },
 
   hasEnoughPoints(giveaway) {
-    return Number(this.karma) === Number(giveaway.points);
+    return Number(this.karma) >= Number(giveaway.points);
   },
 
   /**
