@@ -105,6 +105,13 @@ UserSchema.pre('save', function (next) {
  */
 
 UserSchema.methods = {
+  isNotOwner(giveaway) {
+    return String(giveaway.ownerId) !== String(this._id);
+  },
+
+  isOwner(giveaway) {
+    return String(giveaway.ownerId) === String(this._id);
+  },
 
   /**
    * Authenticate - check if the passwords are the same

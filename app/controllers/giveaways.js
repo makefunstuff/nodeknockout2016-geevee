@@ -2,6 +2,7 @@ const { respond, respondOrRedirect } = require('../utils');
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
 const Giveaway = mongoose.model('Giveaway');
+const User = mongoose.model('User');
 
 exports.show = function (req, res) {
   const user = req.profile;
@@ -47,10 +48,16 @@ exports.create = async(function* (req, res) {
 });
 
 exports.show = async(function* (req, res) {
+  let user = false;
   const giveaway = yield Giveaway.findById(req.params.id);
 
+  if (req.user) {
+    user = yield User.findById(req.user.id);
+  }
+
   respond(res, 'giveaways/show', {
-    giveaway
+    giveaway,
+    user
   });
 });
 

@@ -20,10 +20,6 @@ GiveawaySchema.methods = {
 
   participantsCount() {
     return this.participants.length;
-  },
-
-  isOwner(user) {
-    return user.id === this.ownerId;
   }
 };
 
