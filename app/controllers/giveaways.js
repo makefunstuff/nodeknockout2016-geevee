@@ -99,11 +99,7 @@ exports.edit = async(function* (req, res) {
 
 exports.update = async(function* (req, res) {
   try {
-    const giveaway = yield Giveaway.findById(req.params.id);
-
-    console.log(giveaway);
-
-    yield giveaway.save(req.body.giveaway);
+    yield Giveaway.update({_id: req.params.id }, {$set: req.body.giveaway });
   } catch(e) {
     return respond(res, 'giveaways/new', {
       errors: [e.message]
