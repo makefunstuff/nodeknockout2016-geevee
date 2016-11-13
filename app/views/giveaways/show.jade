@@ -8,9 +8,11 @@ block content
           .col-md-8
             h1= giveaway.title
           .col-md-4.pull-right
-            a.participate-cta.btn.btn-success.col-md-4.pull-right
-              i.fa.fa-gift
-              span Participate
+            form(action="/giveaways/#{giveaway._id}/participate" method="post")
+              input(type="hidden", name="_csrf", value="#{csrf_token}")
+              button(type="submit" class="participate-cta btn btn-success col-md-4 pull-right")
+                i.fa.fa-gift
+                span Participate
         hr.details-divider
         .row
           .col-md-8.giveaway-details
@@ -20,3 +22,16 @@ block content
             .giveway-data
           .col-md-4
             img.img-responsive.img-rounded(src="#{giveaway.image}")
+        hr.details-divider
+        .row
+          .col-md-12
+            .text-center
+              .col-md-1.points(data-toggle="tooltip" data-placement="bottom" title="Points you need to have to participate")
+                i.fa.fa-money
+                span= giveaway.points
+              .col-md-1.participants(data-toggle="tooltip" data-placement="bottom" title="Number of participants")
+                i.fa.fa-user
+                span= giveaway.participantsCount()
+              .col-md-2.dealine(data-toggle="tooltip" data-placement="bottom" title="Giveaway deadline")
+                  i.fa.fa-calendar
+                  span.muted Ends in #{giveaway.humanizedDeadline()}

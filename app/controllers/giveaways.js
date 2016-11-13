@@ -1,4 +1,4 @@
-const { respond, getFakeGiveaways } = require('../utils');
+const { respond, respondOrRedirect } = require('../utils');
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
 const Giveaway = mongoose.model('Giveaway');
@@ -40,7 +40,10 @@ exports.create = async(function* (req, res) {
     });
   }
 
-  return res.redirect('/');
+  respondOrRedirect({ req, res }, '/', {}, {
+    type: 'success',
+    text: 'You have created your giveway'
+  });
 });
 
 exports.show = async(function* (req, res) {
@@ -55,6 +58,21 @@ exports.edit = function (req, res) {
 
 };
 
-exports.update = function (req, res){
+exports.update = function (req, res) {
 
 };
+
+exports.participate = async(function* (req, res) {
+  try {
+    const giveaway = yield Giveaway.findById(req.params.id);
+    giveaway.participants.push(req.user.id);
+    yield giveaway.save();
+  } catch (e) {
+    return respond(res, 'giveaways/index', {});
+  }
+
+  respondOrRedirect({ req, res }, `/giveaways/${req.params.id}`, {}, {
+    type: 'success',
+    text: 'Now you are participating'
+  });
+});
