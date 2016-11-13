@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
+const _ = require('lodash');
 const Schema = mongoose.Schema;
 
 const GiveawaySchema = new Schema({
@@ -18,8 +19,16 @@ GiveawaySchema.methods = {
     return moment(this.deadline).endOf('day').fromNow();
   },
 
+  getParticipants() {
+    return _.uniq(_.map(this.participants, String));
+  },
+
+  getWinnerId() {
+    return _.shuffle(this.getParticipants())[0];
+  },
+
   participantsCount() {
-    return this.participants.length;
+    return this.getParticipants().length;
   }
 };
 

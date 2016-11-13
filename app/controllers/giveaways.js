@@ -87,7 +87,7 @@ exports.participate = async(function* (req, res) {
 
   try {
     const giveaway = yield Giveaway.findById(req.params.id);
-    const isParticipating = giveaway.participants.indexOf(req.params.id) !== -1;
+    const isParticipating = giveaway.getParticipants().indexOf(String(req.params.id)) !== -1;
 
     if (isParticipating) {
       flash = {
