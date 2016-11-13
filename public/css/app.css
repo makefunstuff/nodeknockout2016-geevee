@@ -133,3 +133,11 @@ button.error:focus {
 span {
   margin-left: 3px;
 }
+
+.participate-cta {
+  margin-top: 20px;
+}
+
+.details-divider {
+  border-top: 1px solid #e4e0e3;
+}
