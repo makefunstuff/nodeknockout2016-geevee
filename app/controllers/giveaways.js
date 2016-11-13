@@ -31,7 +31,7 @@ exports.new = function (req, res) {
 
 exports.create = async(function* (req, res) {
   try {
-    const giveaway = new Giveaway(req.body);
+    const giveaway = new Giveaway(req.body.giveaway);
     giveaway.ownerId = req.user.id;
     yield giveaway.save();
   } catch(e) {
