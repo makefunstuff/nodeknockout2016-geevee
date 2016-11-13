@@ -19,15 +19,22 @@ exports.index = async(function* (req, res) {
   const giveaways = yield Giveaway.find({finished: false});
   let { user } = req;
   let pendingGiveaways = false;
+  let wonGiveaways = {};
   let flash = {};
 
   if (user) {
     const today = moment().startOf('day')
 
     user = yield User.findById(user.id);
-    pendingGiveaways = yield Giveaway.find({_id: user._id, finished: false, deadline: { $lte: today.toDate() }});
+    pendingGiveaways = yield Giveaway.find({
+      ownerId: user._id,
+      finished: false,
+      deadline: { $lte: today.toDate() }
+    });
+
     wonGiveaways = yield Giveaway.find({finished: true, winnerId: user._id});
 
+    console.log(pendingGiveaways);
     if (pendingGiveaways.length) {
       flash = {
         type: 'info',
@@ -41,6 +48,7 @@ exports.index = async(function* (req, res) {
   respond(res, 'giveaways/index', {
     title: 'Giveways',
     giveaways,
+    wonGiveaways,
     pendingGiveaways,
     user,
     flash
