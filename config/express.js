@@ -23,6 +23,7 @@ const helpers = require('view-helpers');
 const config = require('./');
 const pkg = require('../package.json');
 
+
 const env = process.env.NODE_ENV || 'development';
 
 /**
@@ -44,6 +45,9 @@ module.exports = function (app, passport) {
   // Use winston on production
   let log = 'dev';
   if (env !== 'development') {
+    const Logger = require('le_node');
+    winston.add(winston.transports.Logentries, { token: '2e3a8c13-07f5-4806-a940-2db5f02d8e90' });
+
     log = {
       stream: {
         write: message => winston.info(message)
