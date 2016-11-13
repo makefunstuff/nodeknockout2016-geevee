@@ -46,12 +46,15 @@ block content
         .row
           .col-md-12
             .text-center
-              .col-md-1.points(data-toggle="tooltip" data-placement="bottom" title="Points you need to have to participate")
-                i.fa.fa-money
-                span= giveaway.points
-              .col-md-1.participants(data-toggle="tooltip" data-placement="bottom" title="Number of participants")
-                i.fa.fa-user
-                span= giveaway.participantsCount()
-              .col-md-2.dealine(data-toggle="tooltip" data-placement="bottom" title="Giveaway deadline")
-                  i.fa.fa-calendar
-                  span.muted Ends in #{giveaway.humanizedDeadline()}
+              if user
+                .col-md-1.points(data-toggle="tooltip" data-placement="bottom" title="Points you need to have to participate")
+                  i.fa.fa-money
+                  span= giveaway.points
+                .col-md-1.participants(data-toggle="tooltip" data-placement="bottom" title="Number of participants")
+                  i.fa.fa-user
+                  span= giveaway.participantsCount()
+                .col-md-2.dealine(data-toggle="tooltip" data-placement="bottom" title="Giveaway deadline")
+                    i.fa.fa-calendar
+                    span.muted Ends in #{giveaway.humanizedDeadline()}
+              else
+                | Log in to see the details
