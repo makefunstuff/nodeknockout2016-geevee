@@ -18,7 +18,7 @@ exports.show = function (req, res) {
 exports.index = async(function* (req, res) {
   const giveaways = yield Giveaway.find({finished: false});
   let { user } = req;
-  let pendingGiveaways = {};
+  let pendingGiveaways = false;
   let flash = {};
 
   if (user) {
@@ -33,6 +33,8 @@ exports.index = async(function* (req, res) {
         type: 'info',
         text: 'Please pick winners to your giveaways'
       }
+    } else {
+      pendingGiveaways = false;
     }
 
   }
