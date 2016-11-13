@@ -7,8 +7,9 @@ const GiveawaySchema = new Schema({
     title: String,
     image: String,
     body: String,
-    deadline: { type: Date, default: Date.now },
+    deadline: { type: Date, default: Date.now() },
     finished: { type: Boolean, default: false },
+    winnerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     ownerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     points: Number
@@ -19,12 +20,21 @@ GiveawaySchema.methods = {
     return moment(this.deadline).endOf('day').fromNow();
   },
 
+  isPending() {
+    const today = moment().startOf('day');
+    const current = moment(this.deadline).startOf('day');
+
+    return String(today) === String(current);
+  },
+
   getParticipants() {
     return _.uniq(_.map(this.participants, String));
   },
 
-  getWinnerId() {
-    return _.shuffle(this.getParticipants())[0];
+  finishGiveaway() {
+    this.finished = true;
+    this.winnerId = _.shuffle(this.getParticipants())[0];
+    this.save();
   },
 
   participantsCount() {

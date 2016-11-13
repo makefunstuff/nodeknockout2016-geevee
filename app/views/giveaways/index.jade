@@ -7,9 +7,20 @@ block content
         h1 All active giveways
       if user
         .col-md-3.pull-right
-          .user-info(data-toggle="tooltip" data-placement="bottom" title="Create giveaways to earn more points")
-            span You have #{user.karma || 0}  points
-
+          .panel.panel-default
+            .panel-body
+              .user-info(data-toggle="tooltip" data-placement="bottom" title="Create giveaways to earn more points")
+                span You have #{user.karma || 0}  points
+      .row.col-md-4
+        if user && pendingGiveaways
+          .col-md-12.pull-right
+            .panel.panel-warning
+              .panel-heading You have pending giveaways
+              .panel-body
+                ul.list-unstyled
+                  each pending in pendingGiveaways
+                    li
+                      a(href="/giveaways/#{pending._id}")= pending.title
 
   .row
     .col-md-12

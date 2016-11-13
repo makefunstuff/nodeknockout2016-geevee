@@ -141,3 +141,7 @@ span {
 .details-divider {
   border-top: 1px solid #e4e0e3;
 }
+
+input, button, a {
+  margin-left: 5px;
+}

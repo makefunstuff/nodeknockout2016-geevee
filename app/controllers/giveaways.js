@@ -1,10 +1,10 @@
 const { respond, respondOrRedirect } = require('../utils');
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
-const winston = require('winston');
+const logger = require('winston');
 const Giveaway = mongoose.model('Giveaway');
 const User = mongoose.model('User');
-const logger = require('winston');
+const moment = require('moment');
 
 exports.show = function (req, res) {
   const user = req.profile;
@@ -16,17 +16,31 @@ exports.show = function (req, res) {
 };
 
 exports.index = async(function* (req, res) {
-  const giveaways = yield Giveaway.find({});
+  const giveaways = yield Giveaway.find({finished: false});
   let { user } = req;
+  let pendingGiveaways = {};
+  let flash = {};
 
   if (user) {
-    user = yield User.findById(user.id);
-  }
+    const today = moment().startOf('day')
 
+    user = yield User.findById(user.id);
+    pendingGiveaways = yield Giveaway.find({finished: false, deadline: { $lte: today.toDate() }});
+
+    if (pendingGiveaways.length) {
+      flash = {
+        type: 'info',
+        text: 'Please pick winners to your giveaways'
+      }
+    }
+
+  }
   respond(res, 'giveaways/index', {
     title: 'Giveways',
     giveaways,
-    user
+    pendingGiveaways,
+    user,
+    flash
   });
 });
 
@@ -48,7 +62,7 @@ exports.delete = async(function* (req, res) {
 
     yield giveaway.remove();
   } catch (e) {
-    winston.error(e.message);
+    logger.error(e.message);
     return respondOrRedirect({ req, res }, 'giveaways/index', {}, {
       type: 'error',
       text: e.message
@@ -73,7 +87,7 @@ exports.create = async(function* (req, res) {
     yield giveaway.save();
 
   } catch(e) {
-    winston.error(e.message);
+    logger.error(e.message);
     return respond(res, 'giveaways/new', {
       errors: [e.message]
     });
@@ -111,7 +125,7 @@ exports.update = async(function* (req, res) {
   try {
     yield Giveaway.update({_id: req.params.id }, {$set: req.body.giveaway });
   } catch(e) {
-    winston.error(e.message);
+    logger.error(e.message);
     return respond(res, 'giveaways/new', {
       errors: [e.message]
     });
@@ -143,7 +157,7 @@ exports.participate = async(function* (req, res) {
       yield giveaway.save();
     }
   } catch (e) {
-    winston.error(e.message);
+    logger.error(e.message);
     return respond(res, 'giveaways/index');
   }
 

@@ -26,6 +26,12 @@ block content
                 input(type="hidden", name="_csrf", value="#{csrf_token}")
                 button(type="submit" class="btn btn-danger col-md-3 pull-right participate-cta") Delete
               a(href="/giveaways/#{giveaway._id}/edit" type="submit" class="btn btn-primary col-md-3 pull-right participate-cta") Edit
+              if giveaway.isPending()
+                form(action="/giveaways/#{giveaway._id}/randomize" method="POST")
+                  input(type="hidden", name="_csrf", value="#{csrf_token}")
+                  button(type="submit" class="btn btn-success col-md-4 pull-right participate-cta")
+                    i.fa.fa-gift
+                    span Get winner
 
         hr.details-divider
         .row
