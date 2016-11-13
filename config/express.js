@@ -14,8 +14,8 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const cors = require('cors');
+const rollbar = require("rollbar");
 const upload = require('multer')();
-
 const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const winston = require('winston');
@@ -49,6 +49,10 @@ module.exports = function (app, passport) {
         write: message => winston.info(message)
       }
     };
+  }
+
+  if (env === 'production') {
+    app.use(rollbar.errorHandler('6b0d677396924360b2ac1407822a86ef'));
   }
 
   // Don't log during tests

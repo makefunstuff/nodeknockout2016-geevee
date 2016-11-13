@@ -1,6 +1,7 @@
 const { respond, respondOrRedirect } = require('../utils');
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
+const winston = require('winston');
 const Giveaway = mongoose.model('Giveaway');
 const User = mongoose.model('User');
 
