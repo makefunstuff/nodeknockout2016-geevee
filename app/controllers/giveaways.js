@@ -26,6 +26,7 @@ exports.index = async(function* (req, res) {
 
     user = yield User.findById(user.id);
     pendingGiveaways = yield Giveaway.find({finished: false, deadline: { $lte: today.toDate() }});
+    wonGiveaways = yield Giveaway.find({finished: true, winnerId: user._id});
 
     if (pendingGiveaways.length) {
       flash = {
@@ -41,6 +42,25 @@ exports.index = async(function* (req, res) {
     pendingGiveaways,
     user,
     flash
+  });
+});
+
+exports.randomize = async(function* (req, res) {
+  try {
+    const giveaway = yield Giveaway.findById(req.params.id);
+    giveaway.finishGiveaway();
+    yield giveaway.save();
+  } catch(e) {
+    logger.error(e.message);
+    return respondOrRedirect({ req, res }, 'giveaways/index', {}, {
+      type: 'error',
+      text: e.message
+    });
+  }
+
+  respondOrRedirect({ req, res }, '/', {}, {
+    type: 'success',
+    text: 'You have finished your giveway, user will be notified when he visits.'
   });
 });
 

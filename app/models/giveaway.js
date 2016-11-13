@@ -34,7 +34,6 @@ GiveawaySchema.methods = {
   finishGiveaway() {
     this.finished = true;
     this.winnerId = _.shuffle(this.getParticipants())[0];
-    this.save();
   },
 
   participantsCount() {

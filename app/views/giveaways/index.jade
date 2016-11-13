@@ -21,6 +21,15 @@ block content
                   each pending in pendingGiveaways
                     li
                       a(href="/giveaways/#{pending._id}")= pending.title
+        if user && wonGiveways
+          .col-md-12.pull-right
+            .panel.panel-warning
+              .panel-heading Congratulations! You have won giveaways
+              .panel-body
+                ul.list-unstyled
+                  each won in wonGiveways
+                    li
+                      a(href="/giveaways/#{won._id}")= won.title
 
   .row
     .col-md-12
