@@ -17,6 +17,6 @@ GiveawaySchema.methods = {
   humanizedDeadline() {
     return moment(this.deadline).endOf('day').fromNow();
   }
-}
+};
 
 mongoose.model('Giveaway', GiveawaySchema);

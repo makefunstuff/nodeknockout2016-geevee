@@ -4,6 +4,8 @@
     var container = $('#items_container');
     var dateInputs = $('[data-date]');
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     $.turbo.use('turbolinks:load', 'turbolinks:render');
 
     container.imagesLoaded(function() {

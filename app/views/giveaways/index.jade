@@ -3,7 +3,14 @@ extends ../layouts/default
 block content
   .row
     .col-md-12
-      h1.text-center All active giveways
+      .col-md-6
+        h1 All active giveways
+      if user
+        .col-md-3.pull-right
+          .user-info(data-toggle="tooltip" data-placement="bottom" title="Create giveaways to earn more points")
+            span You have #{user.karma || 0}  points
+
+
   .row
     .col-md-12
       #items_container.row
