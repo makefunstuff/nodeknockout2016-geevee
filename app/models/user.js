@@ -28,7 +28,7 @@ const UserSchema = new Schema({
   authToken: { type: String, default: '' },
   facebook: {},
   twitter: {},
-});
+}, { timestamps: true });
 
 const validatePresenceOf = value => value && value.length;
 

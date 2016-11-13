@@ -15,7 +15,11 @@ exports.show = function (req, res) {
 
 exports.index = async(function* (req, res) {
   const giveaways = yield Giveaway.find({});
-  const { user } = req;
+  let { user } = req;
+
+  if (user) {
+    user = yield User.findById(user.id);
+  }
 
   respond(res, 'giveaways/index', {
     title: 'Giveways',
@@ -33,8 +37,14 @@ exports.new = function (req, res) {
 exports.create = async(function* (req, res) {
   try {
     const giveaway = new Giveaway(req.body.giveaway);
+    const user = yield User.findById(req.user.id);
+
     giveaway.ownerId = req.user.id;
+    user.karma += 1;
+
+    yield user.save();
     yield giveaway.save();
+
   } catch(e) {
     return respond(res, 'giveaways/new', {
       errors: [e.message]

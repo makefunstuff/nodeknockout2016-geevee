@@ -11,7 +11,7 @@ const GiveawaySchema = new Schema({
     ownerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     points: Number
-});
+}, { timestamps: true });
 
 GiveawaySchema.methods = {
   humanizedDeadline() {
