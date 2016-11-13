@@ -32,9 +32,8 @@ exports.index = async(function* (req, res) {
       deadline: { $lte: today.toDate() }
     });
 
-    wonGiveaways = yield Giveaway.find({finished: true, winnerId: user._id});
+    wonGiveaways = yield Giveaway.find({winnerId: user._id});
 
-    console.log(pendingGiveaways);
     if (pendingGiveaways.length) {
       flash = {
         type: 'info',

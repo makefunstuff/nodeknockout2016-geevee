@@ -13,12 +13,15 @@ block content
                 i(class="fa fa-lg fa-facebook-square" aria-hidden="true")
                 span.icon-text Login
             if user && user.isNotOwner(giveaway)
-              if user.hasEnoughPoints(giveaway)
+              if user.hasEnoughPoints(giveaway) && !giveaway.finished
                 form(action="/giveaways/#{giveaway._id}/participate" method="post")
                   input(type="hidden", name="_csrf", value="#{csrf_token}")
                   button(type="submit" class="participate-cta btn btn-success col-md-4 pull-right")
                     i.fa.fa-gift
                     span Participate
+              if !finished
+                .well
+                  h4.text-success Congratulations you are winner, organizer will contact you soon!
               else
                 a(disabled="true" data-toggle="tooltip" data-placement="bottom" title="You don't have enough points").participate-cta.pull-right.btn.btn-primary Participate
             if user && user.isOwner(giveaway)
